@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @RenderBody()
+    <footer class="site-footer">
+        <div class="site-footer-legal">
+            ERP系统 &copy;
+            @*<a href="http://www.admui.com" target="_blank">admui.com</a>*@
+        </div>
+        <div class="site-footer-right">
+            当前版本：v1.1.0
+            <a class="margin-left-5" data-toggle="tooltip" title="升级" href="#" target="_blank">
+                <i class="icon fa-cloud-upload"></i>
+            </a>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

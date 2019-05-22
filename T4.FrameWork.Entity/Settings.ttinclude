@@ -1,0 +1,4 @@
+﻿<#@ import namespace="System.Text" #>
+<#+ 
+ const string Namespace="T4.FrameWork.Entity";
+#>

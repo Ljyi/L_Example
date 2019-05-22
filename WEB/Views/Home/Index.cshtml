@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@Bootstrap.Label("Bootstrap label标签")
+@Bootstrap.BodyButton_Add("", 20, 30, "", "", "新增")
+<br />
+@Html.TextBox("测试")
+<script type="text/javascript">
+         $('#sdf').on('click', function () {
+             $.layer({
+                 type: 2,
+                 shadeClose: true,
+                 title: 'xxx',
+                 closeBtn: [0, true],
+                 shade: [0.8, '#000'],
+                 border: [0],
+                 offset: ['20px', ''],
+                 area: ['720px', '240px'],
+                 iframe: { src: '页面' }
+             })
+         });
+</script>

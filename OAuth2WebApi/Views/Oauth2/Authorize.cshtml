@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Authorize";
+}
+
+<h2>OAuth授权</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="AuthorizeForm">
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <p>第三方应用程序需要你授权，并获取你的信息</p>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="授权" />
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

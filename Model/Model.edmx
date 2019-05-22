@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SupplyCoordinationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SendSupplyMail">
+          <Key>
+            <PropertyRef Name="SendSupplyMailID" />
+          </Key>
+          <Property Name="SendSupplyMailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="SupplyID" Type="int" />
+          <Property Name="PostUrl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Guid" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsSend" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="SendTime" Type="datetime" />
+          <Property Name="DeleteTime" Type="datetime" />
+          <Property Name="IsAgain" Type="bit" />
+          <Property Name="SendEmail" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SupplyAccount">
+          <Key>
+            <PropertyRef Name="SupplyAccountID" />
+          </Key>
+          <Property Name="SupplyAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
+          <Property Name="SupplierAccount" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdTime" Type="datetime" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="200" />
+          <Property Name="UserType" Type="int" />
+        </EntityType>
+        <EntityType Name="SupplyAction">
+          <Key>
+            <PropertyRef Name="SupplyActionID" />
+          </Key>
+          <Property Name="SupplyActionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelCode" Type="int" />
+          <Property Name="ActionCode" Type="int" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsSupplySubBase" Type="bit" />
+          <Property Name="IsEnable" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="LastUpdUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplyCategory">
+          <Key>
+            <PropertyRef Name="SupplyCategoryID" />
+          </Key>
+          <Property Name="SupplyCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyID" Type="int" Nullable="false" />
+          <Property Name="CategoryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEnable" Type="bit" Nullable="false" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyLoginLog">
+          <Key>
+            <PropertyRef Name="SupplyLoginLogID" />
+          </Key>
+          <Property Name="SupplyLoginLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyID" Type="int" />
+          <Property Name="PurcharseNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="LoginIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LeaveTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplyMaiMatch">
+          <Key>
+            <PropertyRef Name="SupplyMaiMatchID" />
+          </Key>
+          <Property Name="SupplyMaiMatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyID" Type="int" />
+          <Property Name="SendEmail" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SupplyModel">
+          <Key>
+            <PropertyRef Name="SupplyModelID" />
+          </Key>
+          <Property Name="SupplyModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelCode" Type="int" />
+          <Property Name="ModelName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModelPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsEnable" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="IsSupplyBase" Type="bit" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="LastUpdUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplyModelAction">
+          <Key>
+            <PropertyRef Name="SupplyModelActionID" />
+          </Key>
+          <Property Name="SupplyModelActionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModelCode" Type="int" />
+          <Property Name="ActionCode" Type="int" />
+          <Property Name="IsEnable" Type="bit" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="LastUpdUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplyOperation">
+          <Key>
+            <PropertyRef Name="SupplyOperationID" />
+          </Key>
+          <Property Name="SupplyOperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyAccountID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+          <Property Name="LoginIP" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SupplyOperationDetail">
+          <Key>
+            <PropertyRef Name="SupplyOperationDetailID" />
+          </Key>
+          <Property Name="SupplyOperationDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplyOperationID" Type="int" Nullable="false" />
+          <Property Name="ModelID" Type="int" />
+          <Property Name="ActionID" Type="int" />
+          <Property Name="ChangeContent" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SupplyPostData">
+          <Key>
+            <PropertyRef Name="SupplyPostDataID" />
+          </Key>
+          <Property Name="SupplyPostDataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchaseNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ExpressNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="LogiticsCompany" Type="nvarchar" MaxLength="200" />
+          <Property Name="LocalIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="SupplyCoordinationModelStoreContainer">
+          <EntitySet Name="SendSupplyMail" EntityType="Self.SendSupplyMail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyAccount" EntityType="Self.SupplyAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyAction" EntityType="Self.SupplyAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyCategory" EntityType="Self.SupplyCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyLoginLog" EntityType="Self.SupplyLoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyMaiMatch" EntityType="Self.SupplyMaiMatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyModel" EntityType="Self.SupplyModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyModelAction" EntityType="Self.SupplyModelAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyOperation" EntityType="Self.SupplyOperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyOperationDetail" EntityType="Self.SupplyOperationDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyPostData" EntityType="Self.SupplyPostData" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SupplyCoordinationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SendSupplyMail">
+          <Key>
+            <PropertyRef Name="SendSupplyMailID" />
+          </Key>
+          <Property Name="SendSupplyMailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SupplyID" Type="Int32" />
+          <Property Name="PostUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Guid" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsSend" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="SendTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteTime" Type="DateTime" Precision="3" />
+          <Property Name="IsAgain" Type="Boolean" />
+          <Property Name="SendEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupplyAccount">
+          <Key>
+            <PropertyRef Name="SupplyAccountID" />
+          </Key>
+          <Property Name="SupplyAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierAccount" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SupplyAction">
+          <Key>
+            <PropertyRef Name="SupplyActionID" />
+          </Key>
+          <Property Name="SupplyActionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelCode" Type="Int32" />
+          <Property Name="ActionCode" Type="Int32" />
+          <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsSupplySubBase" Type="Boolean" />
+          <Property Name="IsEnable" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupplyCategory">
+          <Key>
+            <PropertyRef Name="SupplyCategoryID" />
+          </Key>
+          <Property Name="SupplyCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsEnable" Type="Boolean" Nullable="false" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdTime" Type="DateTime" Precision="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplyLoginLog">
+          <Key>
+            <PropertyRef Name="SupplyLoginLogID" />
+          </Key>
+          <Property Name="SupplyLoginLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyID" Type="Int32" />
+          <Property Name="PurcharseNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LeaveTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupplyMaiMatch">
+          <Key>
+            <PropertyRef Name="SupplyMaiMatchID" />
+          </Key>
+          <Property Name="SupplyMaiMatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyID" Type="Int32" />
+          <Property Name="SendEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupplyModel">
+          <Key>
+            <PropertyRef Name="SupplyModelID" />
+          </Key>
+          <Property Name="SupplyModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelCode" Type="Int32" />
+          <Property Name="ModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModelPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnable" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="IsSupplyBase" Type="Boolean" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupplyModelAction">
+          <Key>
+            <PropertyRef Name="SupplyModelActionID" />
+          </Key>
+          <Property Name="SupplyModelActionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModelCode" Type="Int32" />
+          <Property Name="ActionCode" Type="Int32" />
+          <Property Name="IsEnable" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupplyOperation">
+          <Key>
+            <PropertyRef Name="SupplyOperationID" />
+          </Key>
+          <Property Name="SupplyOperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyAccountID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <Property Name="LoginIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupplyOperationDetail">
+          <Key>
+            <PropertyRef Name="SupplyOperationDetailID" />
+          </Key>
+          <Property Name="SupplyOperationDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplyOperationID" Type="Int32" Nullable="false" />
+          <Property Name="ModelID" Type="Int32" />
+          <Property Name="ActionID" Type="Int32" />
+          <Property Name="ChangeContent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SupplyPostData">
+          <Key>
+            <PropertyRef Name="SupplyPostDataID" />
+          </Key>
+          <Property Name="SupplyPostDataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchaseNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ExpressNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogiticsCompany" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LocalIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="SupplyCoordinationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SendSupplyMail" EntityType="Self.SendSupplyMail" />
+          <EntitySet Name="SupplyAccount" EntityType="Self.SupplyAccount" />
+          <EntitySet Name="SupplyAction" EntityType="Self.SupplyAction" />
+          <EntitySet Name="SupplyCategory" EntityType="Self.SupplyCategory" />
+          <EntitySet Name="SupplyLoginLog" EntityType="Self.SupplyLoginLog" />
+          <EntitySet Name="SupplyMaiMatch" EntityType="Self.SupplyMaiMatch" />
+          <EntitySet Name="SupplyModel" EntityType="Self.SupplyModel" />
+          <EntitySet Name="SupplyModelAction" EntityType="Self.SupplyModelAction" />
+          <EntitySet Name="SupplyOperation" EntityType="Self.SupplyOperation" />
+          <EntitySet Name="SupplyOperationDetail" EntityType="Self.SupplyOperationDetail" />
+          <EntitySet Name="SupplyPostData" EntityType="Self.SupplyPostData" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SupplyCoordinationModelStoreContainer" CdmEntityContainer="SupplyCoordinationEntities">
+          <EntitySetMapping Name="SendSupplyMail">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SendSupplyMail">
+              <MappingFragment StoreEntitySet="SendSupplyMail">
+                <ScalarProperty Name="SendSupplyMailID" ColumnName="SendSupplyMailID" />
+                <ScalarProperty Name="PurchaseNo" ColumnName="PurchaseNo" />
+                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="IsSend" ColumnName="IsSend" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="DeleteTime" ColumnName="DeleteTime" />
+                <ScalarProperty Name="IsAgain" ColumnName="IsAgain" />
+                <ScalarProperty Name="SendEmail" ColumnName="SendEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyAccount">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyAccount">
+              <MappingFragment StoreEntitySet="SupplyAccount">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="SupplierAccount" ColumnName="SupplierAccount" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SupplyAccountID" ColumnName="SupplyAccountID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdUser" ColumnName="UpdUser" />
+                <ScalarProperty Name="UpdTime" ColumnName="UpdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyAction">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyAction">
+              <MappingFragment StoreEntitySet="SupplyAction">
+                <ScalarProperty Name="SupplyActionID" ColumnName="SupplyActionID" />
+                <ScalarProperty Name="ModelCode" ColumnName="ModelCode" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="IsSupplySubBase" ColumnName="IsSupplySubBase" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdUser" ColumnName="LastUpdUser" />
+                <ScalarProperty Name="LastUpdTime" ColumnName="LastUpdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyCategory">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyCategory">
+              <MappingFragment StoreEntitySet="SupplyCategory">
+                <ScalarProperty Name="SupplyCategoryID" ColumnName="SupplyCategoryID" />
+                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdUser" ColumnName="UpdUser" />
+                <ScalarProperty Name="UpdTime" ColumnName="UpdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyLoginLog">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyLoginLog">
+              <MappingFragment StoreEntitySet="SupplyLoginLog">
+                <ScalarProperty Name="SupplyLoginLogID" ColumnName="SupplyLoginLogID" />
+                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+                <ScalarProperty Name="PurcharseNo" ColumnName="PurcharseNo" />
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LeaveTime" ColumnName="LeaveTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyMaiMatch">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyMaiMatch">
+              <MappingFragment StoreEntitySet="SupplyMaiMatch">
+                <ScalarProperty Name="SupplyMaiMatchID" ColumnName="SupplyMaiMatchID" />
+                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+                <ScalarProperty Name="SendEmail" ColumnName="SendEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyModel">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyModel">
+              <MappingFragment StoreEntitySet="SupplyModel">
+                <ScalarProperty Name="SupplyModelID" ColumnName="SupplyModelID" />
+                <ScalarProperty Name="ModelCode" ColumnName="ModelCode" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="ModelPath" ColumnName="ModelPath" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsSupplyBase" ColumnName="IsSupplyBase" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdUser" ColumnName="LastUpdUser" />
+                <ScalarProperty Name="LastUpdTime" ColumnName="LastUpdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyModelAction">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyModelAction">
+              <MappingFragment StoreEntitySet="SupplyModelAction">
+                <ScalarProperty Name="SupplyModelActionID" ColumnName="SupplyModelActionID" />
+                <ScalarProperty Name="ModelCode" ColumnName="ModelCode" />
+                <ScalarProperty Name="ActionCode" ColumnName="ActionCode" />
+                <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="LastUpdUser" ColumnName="LastUpdUser" />
+                <ScalarProperty Name="LastUpdTime" ColumnName="LastUpdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyOperation">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyOperation">
+              <MappingFragment StoreEntitySet="SupplyOperation">
+                <ScalarProperty Name="SupplyOperationID" ColumnName="SupplyOperationID" />
+                <ScalarProperty Name="SupplyAccountID" ColumnName="SupplyAccountID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="LoginIP" ColumnName="LoginIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyOperationDetail">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyOperationDetail">
+              <MappingFragment StoreEntitySet="SupplyOperationDetail">
+                <ScalarProperty Name="SupplyOperationDetailID" ColumnName="SupplyOperationDetailID" />
+                <ScalarProperty Name="SupplyOperationID" ColumnName="SupplyOperationID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+                <ScalarProperty Name="ChangeContent" ColumnName="ChangeContent" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyPostData">
+            <EntityTypeMapping TypeName="SupplyCoordinationModel.SupplyPostData">
+              <MappingFragment StoreEntitySet="SupplyPostData">
+                <ScalarProperty Name="SupplyPostDataID" ColumnName="SupplyPostDataID" />
+                <ScalarProperty Name="PurchaseNo" ColumnName="PurchaseNo" />
+                <ScalarProperty Name="ExpressNo" ColumnName="ExpressNo" />
+                <ScalarProperty Name="LogiticsCompany" ColumnName="LogiticsCompany" />
+                <ScalarProperty Name="LocalIP" ColumnName="LocalIP" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

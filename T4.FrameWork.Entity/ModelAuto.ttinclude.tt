@@ -1,0 +1,51 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@  include file="Settings.ttinclude" #>
+using System;
+namespace  <#=Namespace#>
+{
+    public class HelloWorld
+    { 
+        public static void Main(string[] args)
+        {
+            <# 
+            List<Person> people = GetPersonList();
+            foreach(Person p in people)
+            { #>
+Console.WriteLine("Hello {0},Welcome to T4 World!","<#= p.Name #>");
+<#}#>
+        }
+    }
+}
+
+<#+
+//类
+public class Person
+{
+    ///名称
+    public string Name{ get; set; }
+
+    public Person(string name)
+    {
+        this.Name = name;
+    }
+}
+//初始化众人
+public List<Person> GetPersonList()
+{
+    List<Person> people = new List<Person>();
+
+    Person p1 = new Person("Tom");
+    Person p2 = new Person("Jim");
+    Person p3 = new Person("Lucy");
+
+    people.Add(p1);
+    people.Add(p2);
+    people.Add(p3);
+
+    return people;
+}
+
+#>
