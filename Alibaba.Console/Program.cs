@@ -24,6 +24,10 @@ namespace Alibaba.Console
     {
         static void Main(string[] args)
         {
+            CreateOrder();
+            SyncProductsPushed();
+            SignExtension.Validate("", "");
+            UpLoadOrder();
             string result = "{\"changedRows\":1,\"success\":[{\"ffid\":5081368743,\"item_id\":7449585824,\"message\":\"Successful\"}],\"error\":[]}";
             BulkmarkShippedResponse bulkmarkShippedResponse = JsonConvert.DeserializeObject<BulkmarkShippedResponse>(result);
             bulkmarkShippedResponse.success.ForEach(p =>

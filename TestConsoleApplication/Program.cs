@@ -16,7 +16,7 @@ namespace TestConsoleApplication
         delegate int MyDelegate(int x, int y);
         static void Main(string[] args)
         {
-            Excel.HtmlToExcel.Print();
+           // Excel.HtmlToExcel.Print();
 
 
             MyDelegate _myDelegate = new MyDelegate(GetSum);
