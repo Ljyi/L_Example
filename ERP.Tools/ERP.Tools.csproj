@@ -85,7 +85,6 @@
     <Compile Include="DataAccessException.cs" />
     <Compile Include="DBErrorType.cs" />
     <Compile Include="ExceptionMessage.cs" />
-    <Compile Include="ExportExcelHelper.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

@@ -328,3 +328,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/WebApplication/wwwroot/css
+/WebApplication/wwwroot/js
+/WebApplication/wwwroot/lib
+/WebApplication/wwwroot/favicon.ico
