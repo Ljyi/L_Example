@@ -13,13 +13,15 @@ namespace NetCoreApplication.Controllers
         private readonly IOperationTransient _transient;
         private readonly IOperationSingleton _singleton;
         private readonly IOperationScoped _scoped;
-        public HomeController(IOperationTransient transientOperation, IOperationScoped scopedOperation, IOperationSingleton singletonOperation)
+        private IServiceProvider _provider;
+        public HomeController(IOperationTransient transientOperation, IOperationScoped scopedOperation, IOperationSingleton singletonOperation, IServiceProvider provider)
         {
             _transient = transientOperation;
             _singleton = singletonOperation;
             _scoped = scopedOperation;
+            _provider = provider;
         }
-        // GET: api/<HomeeController>
+        // 依赖注入
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -37,12 +39,28 @@ namespace NetCoreApplication.Controllers
                 $"singleton2: {_singleton.OperationId}",
             };
         }
-
-        // GET api/<HomeeController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("provider")]
+        [HttpGet]
+        public IEnumerable<string> Get(int id)
         {
-            return "value";
+            var Scoped1 = _provider.GetService<Operation>();
+            var transient = _provider.GetService(typeof(IOperationTransient));
+            var singleton = _provider.GetService(typeof(IOperationSingleton));
+            var scoped = _provider.GetService(typeof(IOperationScoped));
+            return new string[] {
+                $"scope1: { _scoped.OperationId }",
+                $"transient1: {_transient.OperationId}",
+                $"singleton1: {_singleton.OperationId}",
+                "--------------------------------------------------------",
+                $"scope2: {((Operation)scoped).OperationId }",
+                $"transient2: {((Operation)transient).OperationId}",
+                $"singleton2: {((Operation)singleton).OperationId}",
+            };
         }
 
         // POST api/<HomeeController>
