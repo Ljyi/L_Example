@@ -62,11 +62,45 @@ namespace NetCoreApplication.Controllers
                 $"singleton2: {((Operation)singleton).OperationId}",
             };
         }
-
-        // POST api/<HomeeController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("provideobject")]
+        [HttpGet]
+        public IEnumerable<string> provideobject()
         {
+            var transient = _provider.GetService(typeof(IOperationTransient));
+            var singleton = _provider.GetService(typeof(IOperationSingleton));
+            var scoped = _provider.GetService(typeof(IOperationScoped));
+            return new string[] {
+                $"scope1: { _scoped.OperationId }",
+                $"transient1: {_transient.OperationId}",
+                $"singleton1: {_singleton.OperationId}",
+                "--------------------------------------------------------",
+                $"scope2: {((Operation)scoped).OperationId }",
+                $"transient2: {((Operation)transient).OperationId}",
+                $"singleton2: {((Operation)singleton).OperationId}",
+                "--------------------------------------------------------",
+                "scope1与scope2是否相等:"+( _scoped.Equals(scoped)?"是":"否"),
+                "transient1与transient2是否相等:"+( _transient.Equals(transient)?"是":"否"),
+                "singleton1与singleton2是否相等:"+( _singleton.Equals(singleton)?"是":"否"),
+            };
+        }
+
+
+        /// <summary>
+        /// 依赖注入
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("sayhello")]
+        [HttpGet]
+        public string SayHello()
+        {
+            var service = _provider.GetRequiredService<IHelloService>();
+            return service.SayHello(); ;
         }
 
         // PUT api/<HomeeController>/5

@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddTransient<IOperationTransient, Operation>();
 builder.Services.AddScoped<IOperationScoped, Operation>();
 builder.Services.AddSingleton<IOperationSingleton, Operation>();
+builder.Services.AddSingleton<IHelloService, HelloService>();
 //Autofac×¢Èë
 AutofacBuilder.ConfigureServices(builder);
 var app = builder.Build();
@@ -20,6 +21,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+var serviceProvider = app.Services;
+var service = serviceProvider.GetRequiredService<IHelloService>();
+service.SayHello();
+
 app.UseMyMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
