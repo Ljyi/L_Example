@@ -12,6 +12,11 @@ builder.Services.AddSingleton<IOperationSingleton, Operation>();
 builder.Services.AddSingleton<IHelloService, HelloService>();
 //Autofac×¢Èë
 AutofacBuilder.ConfigureServices(builder);
+AutofacBuilder.ServiceServices(builder);
+builder.Host.ConfigureContainer<ContainerBuilder>(container =>
+{
+    AutofacBuilder.ConfigureContainer(container);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
