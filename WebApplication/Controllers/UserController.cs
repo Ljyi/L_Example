@@ -11,7 +11,6 @@ namespace NetCoreApplication.Controllers
     {
         [Autowired]
         private IUserService userService { get; set; }
-
         public IActionResult Index()
         {
             string name = userService.GetUserName();

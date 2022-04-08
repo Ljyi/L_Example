@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NetCoreApplication.AutofacAttribute;
 using NetCoreApplication.Denpendency;
+using NetCoreApplication.Service;
 using System.Reflection;
 
 namespace NetCoreApplication
@@ -29,6 +30,7 @@ namespace NetCoreApplication
             // 生命周期注入： containerBuilder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             //注册服务
             containerBuilder.RegisterType<UserService>().As<IUserService>();
+            containerBuilder.RegisterType<User2Service>().As<IUserService>();
             AutofacAttribute(containerBuilder);
         }
         /// <summary>
@@ -40,7 +42,7 @@ namespace NetCoreApplication
             builder.Services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
         }
         /// <summary>
-        /// 
+        /// 属性注入
         /// </summary>
         public static void AutofacAttribute(ContainerBuilder containerBuilder)
         {
@@ -49,9 +51,18 @@ namespace NetCoreApplication
                 .Where(type => typeof(ControllerBase).IsAssignableFrom(type)).ToArray();
             containerBuilder.RegisterTypes(controllersTypeAssembly).PropertiesAutowired(new AutowiredPropertySelector());
 
-            //批量自动注入,把需要注入层的程序集传参数
+            //1、*******************************批量自动注入,把需要注入层的程序集传参数*********************************************
             //containerBuilder.BatchAutowired(typeof(UserService).Assembly);
             //containerBuilder.BatchAutowired(typeof(UserRepository).Assembly);
+            //2、*******************************************批量注入*************************************************************
+            //注册Service中的对象,Service中的类要以Service结尾，否则注册失败
+           // containerBuilder.RegisterAssemblyTypes(GetAssemblyByName("WXL.Service")).Where(a => a.Name.EndsWith("Service")).AsImplementedInterfaces();
+            //注册Repository中的对象,Repository中的类要以Repository结尾，否则注册失败
+           // containerBuilder.RegisterAssemblyTypes(GetAssemblyByName("WXL.Repository")).Where(a => a.Name.EndsWith("Repository")).AsImplementedInterfaces();
+            //3、***************************************单个注入****************************************************************
+            //单独注册
+            containerBuilder.RegisterType<WxPayService>().Named<IPayService>(typeof(WxPayService).Name);
+            containerBuilder.RegisterType<AliPayService>().Named<IPayService>(typeof(AliPayService).Name);
         }
         /// <summary>
         /// 批量注入扩展
@@ -81,6 +92,15 @@ namespace NetCoreApplication
                .AsImplementedInterfaces()
                .InstancePerLifetimeScope()
                .PropertiesAutowired(new AutowiredPropertySelector());
+        }
+        /// <summary>
+        /// 根据程序集名称获取程序集
+        /// </summary>
+        /// <param name="AssemblyName">程序集名称</param>
+        /// <returns></returns>
+        public static Assembly GetAssemblyByName(String AssemblyName)
+        {
+            return Assembly.Load(AssemblyName);
         }
     }
 }
