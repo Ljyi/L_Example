@@ -16,10 +16,14 @@ namespace NetCoreApplication.Controllers
         {
             _userService = userServices.Where(zw => zw.GetType() == typeof(User2Service)).FirstOrDefault();
         }
-        public IActionResult Index()
-        {
-            string name = _userService.GetUserName();
-            return Content(name);
-        }
+        /// <summary>
+        /// 获取
+        /// </summary>
+        /// <returns></returns>
+        //public IActionResult Index()
+        //{
+        //    string name = _userService.GetUserName();
+        //    return Content(name);
+        //}
     }
 }

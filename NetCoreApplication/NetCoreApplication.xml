@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCoreApplication</name>
+    </assembly>
+    <members>
+        <member name="T:NetCoreApplication.AutofacAttribute.AutowiredPropertySelector">
+            <summary>
+            IPropertySelector:查看属性上是否标记某一个特性
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.AutofacBuilder.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac注册服务的地方,Autofac会自动调用
+            </summary>
+            <param name="containerBuilder"></param>
+        </member>
+        <member name="M:NetCoreApplication.AutofacBuilder.ServiceServices(Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            属性注入
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:NetCoreApplication.AutofacBuilder.AutofacAttribute(Autofac.ContainerBuilder)">
+            <summary>
+            属性注入
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.AutofacBuilder.BatchAutowired(Autofac.ContainerBuilder,System.Reflection.Assembly)">
+            <summary>
+            批量注入扩展
+            </summary>
+            <param name="builder"></param>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:NetCoreApplication.AutofacBuilder.GetAssemblyByName(System.String)">
+            <summary>
+            根据程序集名称获取程序集
+            </summary>
+            <param name="AssemblyName">程序集名称</param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreApplication.Controllers.AutofacController">
+            <summary>
+            依赖注入
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Controllers.AutofacController.Get(System.Int32)">
+             <summary>
+            不使用IOC，通过构造函数进行依赖
+             GET api/
+            </summary>
+             <param name="id"></param>
+             <returns></returns>
+        </member>
+        <member name="T:NetCoreApplication.Controllers.HomeController">
+            <summary>
+            首页
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Controllers.HomeController.Get(System.Int32)">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreApplication.Controllers.HomeController.provideobject">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NetCoreApplication.Controllers.HomeController.SayHello">
+            <summary>
+            依赖注入
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NetCoreApplication.Controllers.PayController">
+            <summary>
+            支付
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Controllers.User2Controller">
+            <summary>
+            多接口注入
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Controllers.UserController">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Denpendency.IScopeDenpendency">
+            <summary>
+            生命周期注入标识
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Denpendency.ISingletonDenpendency">
+            <summary>
+            单例注入标识
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Denpendency.ITransitDenpendency">
+            <summary>
+            瞬时注入
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Lock.LockConsole.GetIncrement">
+            <summary>
+            获取自增
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Lock.LockConsole.AtomicityForLock">
+            <summary>
+            原子操作基于Lock实现
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Lock.LockConsole.AtomicityForInterLock">
+            <summary>
+            自增CAS实现
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Lock.LockConsole.AtomicityForMyCalc">
+            <summary>
+            基于CAS原子操作自己写
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Lock.LockConsole.test">
+            <summary>
+            执行多线程读写
+            </summary>
+        </member>
+        <member name="T:NetCoreApplication.Repository.DBBase">
+            <summary>
+            数据源基类
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:NetCoreApplication.Repository.IRepository" -->
+        <member name="T:NetCoreApplication.Repository.RedisRepository">
+            <summary>
+            对redis数据源操作
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:NetCoreApplication.Repository.SqlRepository" -->
+    </members>
+</doc>

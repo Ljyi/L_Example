@@ -1,5 +1,7 @@
 using Autofac;
+using Microsoft.OpenApi.Models;
 using NetCoreApplication;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,21 @@ builder.Host.ConfigureContainer<ContainerBuilder>(container =>
 {
     AutofacBuilder.ConfigureContainer(container);
 });
+
+builder.Services.AddSwaggerGen();
+
+//builder.Services.AddSwaggerGen(options =>
+//{
+//    options.SwaggerDoc("v1", new OpenApiInfo
+//    {
+//        Version = "v1",
+//        Title = "API±ÍÃ‚",
+//        Description = "API√Ë ˆ"
+//    });
+//    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+//    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,10 +48,17 @@ var serviceProvider = app.Services;
 var service = serviceProvider.GetRequiredService<IHelloService>();
 service.SayHello();
 
-app.UseMyMiddleware();
+// app.UseMyMiddleware();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSwagger();
+//app.UseSwaggerUI();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+   // options.RoutePrefix = string.Empty;
+});
 app.UseRouting();
 
 app.UseAuthorization();

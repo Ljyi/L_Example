@@ -5,16 +5,23 @@ using NetCoreApplication.AutofacAttribute;
 
 namespace NetCoreApplication.Controllers
 {
+    /// <summary>
+    /// 用户
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
         [Autowired]
         private IUserService userService { get; set; }
-        public IActionResult Index()
-        {
-            string name = userService.GetUserName();
-            return Content(name);
-        }
+        /// <summary>
+        /// 活动
+        /// </summary>
+        /// <returns></returns>
+        //public IActionResult Index()
+        //{
+        //    string name = userService.GetUserName();
+        //    return Content(name);
+        //}
     }
 }

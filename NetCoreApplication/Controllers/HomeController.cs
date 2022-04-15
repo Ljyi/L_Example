@@ -5,6 +5,9 @@ using NetCoreApplication;
 
 namespace NetCoreApplication.Controllers
 {
+    /// <summary>
+    /// 首页
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase

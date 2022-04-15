@@ -5,6 +5,9 @@ using NetCoreApplication.Service;
 
 namespace NetCoreApplication.Controllers
 {
+    /// <summary>
+    /// 支付
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PayController : ControllerBase
@@ -20,11 +23,15 @@ namespace NetCoreApplication.Controllers
             _wxPayService = _componentContext.ResolveNamed<IPayService>(typeof(WxPayService).Name);
             _aliPayService = _componentContext.ResolveNamed<IPayService>(typeof(AliPayService).Name);
         }
-        public IActionResult Index()
-        {
-            string wxPay = _wxPayService.Pay();
-            string aliPay = _aliPayService.Pay();
-            return Content(wxPay + aliPay);
-        }
+        /// <summary>
+        /// 1213
+        /// </summary>
+        /// <returns></returns>
+        //public IActionResult Index()
+        //{
+        //    string wxPay = _wxPayService.Pay();
+        //    string aliPay = _aliPayService.Pay();
+        //    return Content(wxPay + aliPay);
+        //}
     }
 }
