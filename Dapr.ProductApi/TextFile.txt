@@ -1,0 +1,3 @@
+﻿
+--
+dapr run --dapr-http-port 3501 --app-port 5002 --app-id DaprProductApi dotnet run

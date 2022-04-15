@@ -1,8 +1,16 @@
+using Dapr.OrderApi.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //builder.WebHost.UseUrls("http://*:5000");
 // Add services to the container.
+
+
+builder.Services.AddActors(options =>
+{
+    options.Actors.RegisterActor<OrderStatusActorService>();
+});
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -19,9 +27,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
+/// <summary>
+/// –Ú¡–ªØ
+/// </summary>
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapActorsHandlers();
+});
 app.MapControllers();
-
 app.Run();
