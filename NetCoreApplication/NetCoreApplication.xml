@@ -40,6 +40,17 @@
             <param name="AssemblyName">程序集名称</param>
             <returns></returns>
         </member>
+        <member name="T:NetCoreApplication.Controllers.AccountController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:NetCoreApplication.Controllers.AccountController.GetToken">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:NetCoreApplication.Controllers.AutofacController">
             <summary>
             依赖注入
