@@ -12,6 +12,14 @@ namespace ThreadAsyn
         public static string Gets { get { return "sdfsds"; } }
         static void Main(string[] args)
         {
+            TaskCance.Test();
+            // 
+            AutoRestEventTest.Test();
+            return;
+            Thread threadinfo = new Thread(OneTest);
+            threadinfo.Name = "Test";
+            threadinfo.Start();
+            Console.ReadKey();
 
             string id = "123,123";
             Console.WriteLine("shuj" + id.TrimEnd(','));
@@ -34,6 +42,7 @@ namespace ThreadAsyn
             }));
             anonymousThread.IsBackground = true;//设置为后台线程
             anonymousThread.Start();
+
             List<int> list = new List<int>() { 1, 2, 3 };
             Parallel.ForEach(list, num =>
             {
@@ -70,6 +79,15 @@ namespace ThreadAsyn
                 }
             });
             t2.Wait();
+        }
+        private static void OneTest()
+        {
+            Thread thisTHread = Thread.CurrentThread;
+            Console.WriteLine("线程标识：" + thisTHread.Name);
+            Console.WriteLine("当前地域：" + thisTHread.CurrentCulture.Name);  // 当前地域
+            Console.WriteLine("线程执行状态：" + thisTHread.IsAlive);
+            Console.WriteLine("是否为后台线程：" + thisTHread.IsBackground);
+            Console.WriteLine("是否为线程池线程" + thisTHread.IsThreadPoolThread);
         }
     }
 }
